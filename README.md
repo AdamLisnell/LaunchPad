@@ -1,73 +1,144 @@
-LaunchPad
+# LaunchPad – AI-Powered Job Matching Platform
+Transforming how students discover internships, graduate roles, and early-career opportunities through intelligent semantic matching.
 
-An AI-powered job matching platform that connects candidates with suitable job opportunities using semantic similarity and machine learning.
+**Python Version:** 3.11  
+**License:** MIT  
+**Code Style:** black, flake8, isort, mypy
 
-Overview
+---
 
-LaunchPad is a scalable job matching system that processes large-scale job datasets (25,000+ positions) and intelligently matches them with candidate profiles.
-The system combines transformer-based semantic embeddings with traditional rule-based filtering to provide accurate and relevant job recommendations.
+## Features
 
-The platform demonstrates modern software engineering practices including:
+### AI-Enhanced Job Matching
+- **Hybrid Matching System** – 70% semantic similarity + 30% rule-based filtering  
+- **Contextual Understanding** – Deep embeddings (384-dim) powered by sentence-transformers  
+- **Explainable Results** – Every match includes interpreted reasoning
 
-Clean architecture
+### Modern Architecture
+- **Hexagonal Architecture** – Clean separation of domain, adapters, and application layers  
+- **Async/Await Stack** – High-performance FastAPI + async SQLAlchemy  
+- **Production Ready** – Docker, Alembic migrations, CI/CD workflows  
+- **Dynamic Questionnaires** – Conditional, requirement-driven forms for candidate profiling  
 
-Asynchronous processing
+### Scalability & Reliability
+- Handles **25,000+ job postings** efficiently  
+- Safe fallback to rule-based matching if ML models are unreachable  
+- Clear separation of concerns ensures testability and maintainability  
 
-Containerization
+---
 
-Automated CI/CD pipelines
+## Screenshots
+*(coming soon)*
 
-Key Features
+**REST API Interface**  
+Screenshot coming soon
 
-Hybrid Matching Algorithm – 70% semantic similarity + 30% rule-based logic
+**Frontend React Application**  
+Screenshot coming soon
 
-Semantic Understanding – Sentence-transformers generate 384-dimensional embeddings
+---
 
-Scalable Architecture – Hexagonal/ports-and-adapters structure
+## Quick Start
 
-Async/Await Processing – FastAPI + async SQLAlchemy
+### Prerequisites
+- Python 3.11+
+- Docker & Docker Compose  
+- Node.js 16+  
+- Git  
 
-Dynamic Questionnaires – Conditional requirement system
+---
 
-Explainable Recommendations – Detailed reasoning for each match
+## Installation
 
-Production-Ready – Docker, migrations, CI/CD-ready setup
+### Clone the repository
+```bash
+git clone https://github.com/yourusername/LaunchPad.git
+cd LaunchPad
+Create a virtual environment
+bash
+Copy code
+python -m venv venv
+source venv/bin/activate
+# Windows: venv\Scripts\activate
+Install backend dependencies
+bash
+Copy code
+pip install -r requirements.txt
+Start MySQL
+bash
+Copy code
+docker-compose up -d
+Apply database migrations
+bash
+Copy code
+alembic upgrade head
+Run the backend
+bash
+Copy code
+uvicorn frameworks.fastapi.main:app --reload
+Run the frontend
+bash
+Copy code
+cd frontend
+npm install
+npm start
+Backend API: http://localhost:8000
+Frontend UI: http://localhost:3000
 
-Architecture
+Configuration
+Create a .env file:
 
-LaunchPad follows hexagonal architecture to ensure maintainability, testability, and flexibility:
+env
+Copy code
+ENVIRONMENT=development
+DATABASE_URL=mysql+aiomysql://user:password@localhost:3306/launchpad
+LOG_LEVEL=DEBUG
+Production tips:
 
-LaunchPad/
-├── core/                  # Domain logic and business rules
-│   ├── domain/            # Entities (Candidate, Job, Requirement)
-│   ├── use_cases/         # Application services
-│   ├── ports/             # Interfaces
-│   └── services/          # Embedding generation & ML logic
-├── adapters/              # External integrations
-│   ├── repositories/      # MySQL + in-memory implementations
-│   └── services/          # External service adapters
-├── frameworks/
-│   └── fastapi/           # FastAPI REST API
-├── infrastructure/
-│   └── db/                # DB config and ORM models
-├── frontend/              # React application
-└── scripts/               # Utilities for data import & processing
+Use stronger credentials
 
-Design Patterns
+Set ENVIRONMENT=production
 
-Repository Pattern
+API Documentation
+Swagger UI: http://localhost:8000/docs
 
-Factory Pattern
+ReDoc: http://localhost:8000/redoc
 
-Use Case Pattern
+Usage
+Import Job Data
+bash
+Copy code
+python scripts/import_kaggle_jobs.py --file path/to/linkedin_jobs.csv
+Generate Embeddings
+bash
+Copy code
+python scripts/generate_embeddings.py
+Seed the Database
+bash
+Copy code
+python scripts/seed_db.py
+Matching Algorithm
+Semantic Matching (70%)
+Embeddings generated using all-MiniLM-L6-v2
 
-Adapter Pattern
+Cosine similarity comparison
 
-Dependency Injection
+Captures context, not just keywords
+
+Rule-Based Matching (30%)
+Location
+
+Skills overlap
+
+Education requirements
+
+Experience alignment
+
+Failover
+If embedding service is unavailable, switches automatically to rule-based matching.
 
 Technology Stack
 Backend
-
 Python 3.11
 
 FastAPI
@@ -83,7 +154,6 @@ Sentence-transformers
 PyTorch
 
 Frontend
-
 React 19
 
 Axios
@@ -91,8 +161,7 @@ Axios
 Create React App
 
 DevOps
-
-Docker & Docker Compose
+Docker, Docker Compose
 
 GitHub Actions
 
@@ -100,198 +169,80 @@ pytest
 
 black, flake8, isort, mypy
 
-Getting Started
-Prerequisites
-
-Python 3.11+
-
-Docker & Docker Compose
-
-Node.js 16+
-
-Git
-
-Installation
-
-Clone the repository
-
-git clone https://github.com/yourusername/LaunchPad.git
-cd LaunchPad
-
-
-Create and activate a virtual environment
-
-python -m venv venv
-source venv/bin/activate
-# Windows: venv\Scripts\activate
-
-
-Install Python dependencies
-
-pip install -r requirements.txt
-
-
-Start MySQL
-
-docker-compose up -d
-
-
-Run migrations
-
-alembic upgrade head
-
-
-Start the backend
-
-uvicorn frameworks.fastapi.main:app --reload
-
-
-Start the frontend
-
-cd frontend
-npm install
-npm start
-
-
-API: http://localhost:8000
-Frontend: http://localhost:3000
-
-API Documentation
-
-Swagger UI: http://localhost:8000/docs
-
-ReDoc: http://localhost:8000/redoc
-
-Usage
-Importing Job Data
-python scripts/import_kaggle_jobs.py --file path/to/linkedin_jobs.csv
-
-Generating Embeddings
-python scripts/generate_embeddings.py
-
-Seeding the Database
-python scripts/seed_db.py
-
-Testing
-
-Run all tests:
-
+Project Structure
+graphql
+Copy code
+LaunchPad/
+├── core/                     # Domain logic & business rules
+│   ├── domain/               # Entities (Candidate, Job, Requirement)
+│   ├── use_cases/            # Application services
+│   ├── ports/                # Interface definitions
+│   └── services/             # Embedding & ML logic
+├── adapters/
+│   ├── repositories/         # MySQL + in-memory implementations
+│   └── services/             # External service adapters
+├── frameworks/
+│   └── fastapi/              # FastAPI REST API
+├── infrastructure/
+│   └── db/                   # Database configuration and ORM
+├── frontend/                 # React application
+└── scripts/                  # Data import & utilities
+Development
+Install development dependencies
+bash
+Copy code
+pip install -e ".[dev]"
+Run tests
+bash
+Copy code
 pytest
-
-
-Run with coverage:
-
-pytest --cov=core --cov=adapters --cov=frameworks
-
+Format code
+bash
+Copy code
+black .
+isort .
+Type checking
+bash
+Copy code
+mypy .
+Linting
+bash
+Copy code
+flake8 .
+Running Tests With Coverage
+bash
+Copy code
+pytest --cov=core --cov=adapters --cov=frameworks --cov-report=html
 CI/CD Pipeline
+GitHub Actions pipeline automatically:
 
-GitHub Actions automatically:
+Formats code
 
-Formats code (black)
+Lints
 
-Lints (flake8)
+Sorts imports
 
-Sorts imports (isort)
+Checks types
 
-Runs type checking (mypy)
-
-Executes full test suite
-
-Configuration
-
-Create a .env file:
-
-ENVIRONMENT=development
-DATABASE_URL=mysql+aiomysql://user:password@localhost:3306/launchpad
-LOG_LEVEL=DEBUG
-
-
-For production:
-
-Update credentials
-
-Set ENVIRONMENT=production
-
-Matching Algorithm
-Semantic Matching (70%)
-
-Uses all-MiniLM-L6-v2
-
-Computes cosine similarity on 384-dim embeddings
-
-Captures context beyond keyword matching
-
-Rule-Based Matching (30%)
-
-Location
-
-Skills overlap
-
-Education level
-
-Experience compatibility
-
-Fallback
-
-If ML model is unavailable → pure rule-based matching.
-
-Project Documentation
-
-Located in docs/:
-
-Architecture Decision Records
-
-Risk Log
-
-Dependency Map
+Runs the entire test suite
 
 Performance Considerations
+Fully async I/O
 
-Async I/O
-
-DB connection pooling
+Connection pooling
 
 Batch embedding generation
 
 Pagination for large datasets
 
-Import script rate limiting
-
-Contributing
-
-Fork
-
-Create feature branch
-
-Add tests
-
-Ensure all checks pass
-
-Submit PR
-
-Development Principles
-
-Clean Architecture
-
-SOLID Principles
-
-TDD
-
-CI
-
-Type Safety
-
-Code Quality
-
-Strong Documentation
+Rate limiting on import scripts
 
 Future Enhancements
+Redis caching layer
 
-Redis caching
+Vector database (Weaviate, Pinecone, FAISS)
 
-Vector DB (Pinecone/Weaviate)
-
-A/B testing
+A/B testing for match quality
 
 Authentication & authorization
 
@@ -299,20 +250,30 @@ Real-time notifications
 
 Admin dashboard
 
-License
+Contributing
+Contributions welcome – standard workflow:
 
-MIT License — see LICENSE.
+Fork repository
+
+Create feature branch
+
+Add tests
+
+Ensure all checks pass
+
+Open pull request
+
+License
+MIT License – see LICENSE file for details.
 
 Author
-
 Adam Lisnell
 
 Acknowledgments
+Kaggle LinkedIn Jobs Dataset
 
-Kaggle LinkedIn job dataset
+Sentence-transformers Team
 
-Sentence-transformers
-
-FastAPI
+FastAPI Framework
 
 Open-source community
