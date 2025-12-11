@@ -29,13 +29,18 @@ Transforming how students discover internships, graduate roles, and early-career
 ---
 
 ## Screenshots
-*(coming soon)*
 
 **REST API Interface**
-Screenshot coming soon
+<img src="images/api_swagger.png" width="700"/>
 
 **Frontend React Application**
-Screenshot coming soon
+<img src="images/landing_page.png" width="700"/>
+
+<img src="images/process.png" width="700"/>
+
+<img src="images/profile_input.png" width="700"/>
+
+<img src="images/job_results.png" width="700"/>
 
 ---
 
